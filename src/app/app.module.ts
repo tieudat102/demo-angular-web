@@ -1,5 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FormsModule } from '@angular/forms';
+import { CustomMaterialModule } from './module/marterial.module';
+import { AppRoutingModule } from './module/app.routing.module';
 
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
@@ -9,7 +15,7 @@ import { VideoPageComponent } from './pages/video-page/video-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { VideoViewComponent } from './components/video-view/video-view.component';
 import { VideoSearchComponent } from './components/video-search/video-search.component';
-import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +30,10 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    CustomMaterialModule,
+    FormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
