@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule  } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { CustomMaterialModule } from './module/marterial.module';
@@ -34,6 +35,7 @@ import { VideoSearchComponent } from './components/video-search/video-search.com
     CustomMaterialModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
