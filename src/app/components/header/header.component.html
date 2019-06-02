@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Demo Angular Web</span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+
+    <div>
+      <button mat-button><a routerLink="/">Home page</a></button>
+      <button *ngIf="user.isLogin()" mat-button><a routerLink="/video/location">Video</a></button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
