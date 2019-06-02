@@ -1,3 +1,52 @@
-<p>
-  video-search works!
-</p>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Search Video</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Latitude" formControlName="latitude">
+
+        <mat-error *ngFor="let validation of validate_messages.latitude">
+          <mat-error class="error-message" *ngIf="latitude.hasError(validation.type) && latitude.touched">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Longitude" formControlName="longitude">
+
+        <mat-error *ngFor="let validation of validate_messages.longitude">
+          <mat-error class="error-message" *ngIf="longitude.hasError(validation.type) && longitude.touched">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Distance" formControlName="distance">
+
+        <mat-error *ngFor="let validation of validate_messages.distance">
+          <mat-error class="error-message" *ngIf="distance.hasError(validation.type) && distance.touched">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+
+    </form>
+    <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'block'"></mat-spinner> -->
+  </mat-card-content>
+
+  <mat-card-actions align="middle">
+    <button mat-raised-button class="submit-btn" color="primary" type="submit" [disabled]="!form.valid || is_loading"
+      (click)="search()">Search</button>
+
+  </mat-card-actions>
+</mat-card>
+
+<div align="middle" *ngIf="is_loading">
+  <mat-spinner></mat-spinner>
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,11 @@ export class ApiService {
   base_url: string;
   httpOptions: Object;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private toast: ToastrService,
+    private spinner: NgxSpinnerService
+  ) {
     this.base_url = "http://localhost:8000/api";
 
     this.httpOptions = {
@@ -20,26 +25,29 @@ export class ApiService {
     };
   }
 
-  endpoint(url) {
+  endpoint(url: string) {
     return this.base_url + "/" + url;
   }
 
-  login(data, complete, error) {
-    this.http.post(this.endpoint('login'), data).subscribe(res => {
-      if (res) {
-        complete(res);
-      } else {
-        error(res);
+  login(data: Object, complete: Function, error: Function) {
+    this.http.post(this.endpoint('login'), data).subscribe(
+      res => complete(res),
+      err => {
+        error(err);
+        this.handleError(err);
       }
-    }, err => this.handleError(err));
+    );
   }
 
   handleError(err) {
+    // this.spinner.hide();
     if (err.error.message) {
-      alert(err.error.message);
+      this.toast.error(err.error.message, '', {
+        // positionClass: "toast-top-center"
+      });
     }
     else {
-      alert("An occur error, please try again.")
+      this.toast.error("An occur error, please try again.");
     }
   }
 }

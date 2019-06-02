@@ -4,9 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule  } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CustomMaterialModule } from './module/marterial.module';
 import { AppRoutingModule } from './module/app.routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
@@ -16,6 +18,8 @@ import { VideoPageComponent } from './pages/video-page/video-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { VideoViewComponent } from './components/video-view/video-view.component';
 import { VideoSearchComponent } from './components/video-search/video-search.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 
 @NgModule({
@@ -27,15 +31,19 @@ import { VideoSearchComponent } from './components/video-search/video-search.com
     VideoPageComponent,
     LoginFormComponent,
     VideoViewComponent,
-    VideoSearchComponent
+    VideoSearchComponent,
+    HeaderComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CustomMaterialModule,
-    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

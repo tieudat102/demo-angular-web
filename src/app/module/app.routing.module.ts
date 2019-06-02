@@ -6,13 +6,15 @@ import { LoginLayoutComponent } from '../layouts/login-layout/login-layout.compo
 
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
 import { VideoPageComponent } from '../pages/video-page/video-page.component';
+import { HomePageComponent } from '../pages/home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: VideoPageComponent }
+      { path: '', component: HomePageComponent},
+      { path: 'video/location', component: VideoPageComponent }
     ]
   }
   ,
