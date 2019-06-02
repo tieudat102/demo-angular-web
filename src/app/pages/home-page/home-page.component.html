@@ -1,0 +1,12 @@
+<div align="center">
+  <h1>HOME PAGE</h1>
+
+  <div *ngIf="!user.isLogin(); else logged_content">
+    <button mat-button><a routerLink="/register">Register</a></button>
+    <button mat-button><a routerLink="/login">Login</a></button>
+  </div>
+  <ng-template #logged_content>
+    <p>Hi {{ user.getFullName() }}<p>
+  </ng-template>
+
+</div>
