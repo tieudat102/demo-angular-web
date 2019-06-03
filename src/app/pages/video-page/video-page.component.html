@@ -1,5 +1,5 @@
-<div align="center">
-  <app-video-search></app-video-search>
+<div>
+  <app-video-search (dataOutput)="listenOutput($event)"></app-video-search>
 
-  <app-video-view></app-video-view>
+  <app-video-view [data]="data"></app-video-view>
 </div>

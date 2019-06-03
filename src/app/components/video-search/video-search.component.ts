@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { UserService } from '../../services/user.service';
@@ -9,9 +9,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./video-search.component.css']
 })
 export class VideoSearchComponent implements OnInit {
+  @Output() dataOutput = new EventEmitter<Object>();
+
   form: FormGroup;
   validate_messages: Object;
   is_loading: boolean
+  data: Object;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +32,7 @@ export class VideoSearchComponent implements OnInit {
     this.form = this.fb.group({
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      distance: ['', Validators.required]
+      distance: ['5', Validators.required]
     });
 
     this.validate_messages = {
@@ -50,22 +53,18 @@ export class VideoSearchComponent implements OnInit {
   get distance() { return this.form.get('distance'); }
 
   search() {
-    // this.spinner.show();
-    // this.is_loading = true;
-    // this.api.login(this.form.value,
-    //   res => {
-    //     // this.spinner.hide();
-    //     this.is_loading = false;
-    //     if (res.user) {
-    //       this.user.setUser(res.user);
-    //       this.toast.success("Login Success!");
-    //       this.router.navigate(['video/location']);
-    //     }
-    //   },
-    //   err => {
-    //     console.log("LOGIN ERROR");
-    //     this.is_loading = false
-    //   }
-    // );
+    this.is_loading = true;
+    this.dataOutput.emit(null);
+    this.api.getVideoByLocation(this.form.value,
+      res => {
+        this.is_loading = false;
+        this.data = res;
+        this.dataOutput.emit(res);
+      },
+      err => {
+        // console.log("LOGIN ERROR");
+        this.is_loading = false
+      }
+    );
   }
 }

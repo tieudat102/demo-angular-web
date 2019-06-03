@@ -1,3 +1,13 @@
-<p>
-  video-view works!
-</p>
+<h3 mat-subheader>Videos</h3>
+
+<mat-list *ngIf="data">
+  <mat-list-item (click)="openVideo(item.id.videoId)" *ngFor="let item of data.items" title="{{item.snippet.description}}">
+    <img matListAvatar src="{{item.snippet.thumbnails.default.url}}">
+
+    <h3 matLine><strong>{{item.snippet.title}}</strong></h3>
+    <p matLine>{{item.snippet.channelTitle}}</p>
+
+  </mat-list-item>
+
+  <mat-divider></mat-divider>
+</mat-list>
