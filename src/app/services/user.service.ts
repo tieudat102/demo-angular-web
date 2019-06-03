@@ -39,4 +39,9 @@ export class UserService {
   isLogin() {
     return this.user == null ? false : true;
   }
+
+  logout(){
+    this.user = null;
+    localStorage.setItem('user', null);
+  }
 }

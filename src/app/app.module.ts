@@ -20,6 +20,8 @@ import { VideoViewComponent } from './components/video-view/video-view.component
 import { VideoSearchComponent } from './components/video-search/video-search.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     VideoViewComponent,
     VideoSearchComponent,
     HeaderComponent,
-    HomePageComponent
+    HomePageComponent,
+    RegisterFormComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,

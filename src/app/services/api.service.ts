@@ -41,7 +41,7 @@ export class ApiService {
 
   private handleError(err) {
     // this.spinner.hide();
-    if (err.error.message) {
+    if (err.error.message && err.error.message instanceof String) {
       this.toast.error(err.error.message, '', {
         // positionClass: "toast-top-center"
       });
@@ -53,6 +53,16 @@ export class ApiService {
 
   login(data: Object, complete: Function, error: Function) {
     this.http.post(this.endpoint('login'), data, this.httpOptions).subscribe(
+      res => complete(res),
+      err => {
+        error(err);
+        this.handleError(err);
+      }
+    );
+  }
+
+  register(data: Object, complete: Function, error: Function) {
+    this.http.post(this.endpoint('register'), data, this.httpOptions).subscribe(
       res => complete(res),
       err => {
         error(err);

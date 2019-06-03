@@ -5,6 +5,7 @@ import { MainLayoutComponent } from '../layouts/main-layout/main-layout.componen
 import { LoginLayoutComponent } from '../layouts/login-layout/login-layout.component';
 
 import { LoginPageComponent } from '../pages/login-page/login-page.component';
+import { RegisterPageComponent } from '../pages/register-page/register-page.component';
 import { VideoPageComponent } from '../pages/video-page/video-page.component';
 import { HomePageComponent } from '../pages/home-page/home-page.component';
 
@@ -19,9 +20,12 @@ const routes: Routes = [
   }
   ,
   {
-    path: 'login',
+    path: '',
     component: LoginLayoutComponent,
-    children: [{path: '', component: LoginPageComponent }]
+    children: [
+      {path: 'login', component: LoginPageComponent },
+      {path: 'register', component: RegisterPageComponent }
+    ]
   },
 ];
 
