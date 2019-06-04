@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterFormComponent implements OnInit {
 
   form: FormGroup;
-  validate_messages: Object;
+  validate_messages: any;
   is_loading: boolean
 
   constructor(

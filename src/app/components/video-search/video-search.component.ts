@@ -12,9 +12,9 @@ export class VideoSearchComponent implements OnInit {
   @Output() dataOutput = new EventEmitter<Object>();
 
   form: FormGroup;
-  validate_messages: Object;
+  validate_messages: any;
   is_loading: boolean
-  data: Object;
+  data: any;
 
   constructor(
     private fb: FormBuilder,
