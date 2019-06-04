@@ -30,17 +30,19 @@ export class VideoSearchComponent implements OnInit {
 
   initFormLogin() {
     this.form = this.fb.group({
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
-      distance: ['5', Validators.required]
+      latitude: ['', [Validators.required, Validators.pattern("[0-9]+([\.][0-9]{0,14})?")]],
+      longitude: ['', [Validators.required, Validators.pattern("[0-9]+([\.][0-9]{0,14})?")]],
+      distance: ['5', Validators.required],
     });
 
     this.validate_messages = {
       'latitude': [
         { type: 'required', message: 'Latitude is required' },
+        { type: 'pattern', message: 'Latitude is not correct format' }
       ],
       'longitude': [
-        { type: 'required', message: "Longitude is required" }
+        { type: 'required', message: "Longitude is required" },
+        { type: 'pattern', message: 'Longitude is not correct format' }
       ],
       'distance': [
         { type: 'required', message: "Distance is required" }
@@ -52,10 +54,14 @@ export class VideoSearchComponent implements OnInit {
   get longitude() { return this.form.get('longitude'); }
   get distance() { return this.form.get('distance'); }
 
-  search() {
+  search(options: Object = {}) {
     this.is_loading = true;
     this.dataOutput.emit(null);
-    this.api.getVideoByLocation(this.form.value,
+    var params = this.form.value;
+    if(options['pageToken']){
+      params.pageToken = options['pageToken'];
+    }
+    this.api.getVideoByLocation(params,
       res => {
         this.is_loading = false;
         this.data = res;
@@ -66,5 +72,13 @@ export class VideoSearchComponent implements OnInit {
         this.is_loading = false
       }
     );
+  }
+
+  next(pageToken: string){
+    this.search({pageToken: this.data['nextPageToken']});
+  }
+
+  prev(pageToken: string){
+    this.search({pageToken: this.data['prevPageToken']});
   }
 }

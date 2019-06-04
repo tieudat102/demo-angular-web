@@ -18,16 +18,16 @@ export class ApiService {
     private spinner: NgxSpinnerService,
     private user: UserService
   ) {
-    this.initHttpHeader();
     this.base_url = environment.base_url_api;
   }
 
-  private initHttpHeader() {
+  private getHttpOptions() {
     var headers = { 'Content-Type': 'application/json' };
     if (this.user.isLogin()) {
       headers['Authorization'] = "Bearer " + this.user.getAccessToken();
     }
     this.httpOptions = { headers: new HttpHeaders(headers) };
+    return this.httpOptions;
   }
 
   private endpoint(url: string, data: Object = null) {
@@ -41,7 +41,8 @@ export class ApiService {
 
   private handleError(err) {
     // this.spinner.hide();
-    if (err.error.message && err.error.message instanceof String) {
+    if (err.error.message && typeof err.error.message === "string") {
+      console.log(err.error.message);
       this.toast.error(err.error.message, '', {
         // positionClass: "toast-top-center"
       });
@@ -52,7 +53,7 @@ export class ApiService {
   }
 
   login(data: Object, complete: Function, error: Function) {
-    this.http.post(this.endpoint('login'), data, this.httpOptions).subscribe(
+    this.http.post(this.endpoint('login'), data, this.getHttpOptions()).subscribe(
       res => complete(res),
       err => {
         error(err);
@@ -62,7 +63,7 @@ export class ApiService {
   }
 
   register(data: Object, complete: Function, error: Function) {
-    this.http.post(this.endpoint('register'), data, this.httpOptions).subscribe(
+    this.http.post(this.endpoint('register'), data, this.getHttpOptions()).subscribe(
       res => complete(res),
       err => {
         error(err);
@@ -72,7 +73,7 @@ export class ApiService {
   }
 
   getVideoByLocation(data: any, complete: Function, error: Function) {
-    this.http.get(this.endpoint('video/location', data), this.httpOptions).subscribe(
+    this.http.get(this.endpoint('video/location', data), this.getHttpOptions()).subscribe(
       res => complete(res),
       err => {
         error(err);
